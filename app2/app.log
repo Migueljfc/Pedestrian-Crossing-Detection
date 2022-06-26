@@ -1,0 +1,24 @@
+[2022-06-24 13:30:33,051]  * Running on http://0.0.0.0:5050/ (Press CTRL+C to quit)
+[2022-06-24 13:32:49,405] 127.0.0.1 - - [24/Jun/2022 13:32:49] "GET / HTTP/1.1" 200 -
+[2022-06-24 13:32:50,052] 127.0.0.1 - - [24/Jun/2022 13:32:50] "GET /favicon.ico HTTP/1.1" 404 -
+[2022-06-24 13:32:53,499] Exception on /start [GET]
+Traceback (most recent call last):
+  File "/home/rodrigo/miniconda3/lib/python3.9/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/rodrigo/miniconda3/lib/python3.9/site-packages/flask/app.py", line 1953, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/home/rodrigo/miniconda3/lib/python3.9/site-packages/flask/app.py", line 1968, in finalize_request
+    response = self.make_response(rv)
+  File "/home/rodrigo/miniconda3/lib/python3.9/site-packages/flask/app.py", line 2097, in make_response
+    raise TypeError(
+TypeError: The view function did not return a valid response. The function either returned None or ended without a return statement.
+[2022-06-24 13:32:53,558] 127.0.0.1 - - [24/Jun/2022 13:32:53] "GET /start HTTP/1.1" 500 -
+[2022-06-24 13:32:54,886] 127.0.0.1 - - [24/Jun/2022 13:32:54] "GET /stop HTTP/1.1" 200 -
+[2022-06-24 13:32:54,920] 127.0.0.1 - - [24/Jun/2022 13:32:54] "GET / HTTP/1.1" 200 -
+[2022-06-24 13:32:55,123] 127.0.0.1 - - [24/Jun/2022 13:32:55] "GET /favicon.ico HTTP/1.1" 404 -
+[2022-06-24 13:34:18,434] 127.0.0.1 - - [24/Jun/2022 13:34:18] "GET / HTTP/1.1" 304 -
+[2022-06-24 13:35:41,639] 127.0.0.1 - - [24/Jun/2022 13:35:41] "GET / HTTP/1.1" 200 -
+[2022-06-24 13:35:41,802] 127.0.0.1 - - [24/Jun/2022 13:35:41] "GET /favicon.ico HTTP/1.1" 404 -
+[2022-06-24 13:36:41,864] 127.0.0.1 - - [24/Jun/2022 13:36:41] "GET / HTTP/1.1" 304 -
+[2022-06-24 13:36:42,021] 127.0.0.1 - - [24/Jun/2022 13:36:42] "GET /favicon.ico HTTP/1.1" 404 -
+[2022-06-24 13:42:24,640] [_runCommand ] Running '../docker/rm.sh'
