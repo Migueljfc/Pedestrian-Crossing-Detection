@@ -5,53 +5,33 @@
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Project_Completed-brightgreen)
 
-## Table of Contents
-* [About the Project](#about-the-project)
-* [Demo](#demo)
-* [System Architecture](#system-architecture)
-* [Getting Started](#getting-started)
-* [Usage](#usage)
+## 📖 About the Project
 
-## About the Project
-This project was developed for the **RSA (Redes e Sistemas Autónomos)** course. The main objective is to detect pedestrians crossing the street using computer vision algorithms and a simulation environment. 
+This project, developed for the **RSA (Redes e Sistemas Autónomos)** course, implements a **V2X-enabled Pedestrian Safety System**. It goes beyond simple computer vision by integrating an autonomous detection unit with a Cooperative Intelligent Transport Systems (C-ITS) communication stack.
 
-By identifying pedestrians in real-time or simulated environments, the system aims to improve road safety, potentially triggering alerts or autonomous braking systems in vehicles approaching crosswalks.
+The system is designed to detect Vulnerable Road Users (VRUs) at crosswalks and broadcast standardized ITS messages to alert surrounding connected vehicles (V2I/V2V communication), effectively extending the "line-of-sight" of autonomous agents through network cooperation.
 
-## Demo
+### 🏗️ System Architecture & Components
+
+The ecosystem is orchestrated via **Docker**, ensuring a modular microservice architecture:
+
+1.  **V2X Communication Stack (Vanetza):** Running in a dedicated container, [Vanetza](https://github.com/riebl/vanetza) provides the implementation of the **ETSI ITS-G5** protocol suite. It handles the generation, encoding, and transmission of standardized messages (such as **DENM** or **CAM**) when a hazard (pedestrian) is identified.
+    
+2.  **Detection & Logic Unit (`/app2`):**
+    The "brain" of the system. Written in **Python**, it processes data from the simulator. Once a pedestrian is detected within the crosswalk's safety ROI (Region of Interest), it triggers an API call to the Vanetza stack to broadcast a decentralized notification to the network.
+    
+3.  **The Environment Simulator (`/simulador`):**
+    A virtual testbed (built with **JavaScript/HTML**) that simulates urban traffic and pedestrian behavior. It provides the necessary telemetry and visual triggers to validate the detection logic and the latency of the V2X message propagation.
+
+### 🛠️ Technology Stack
+
+* **Communication:** [Vanetza](https://github.com/riebl/vanetza) (ETSI ITS-G5 stack: Facilities, Networking & Transport, Security).
+* **Message Standards:** Likely utilizing **DENM** (Decentralized Environmental Notification Message) for pedestrian hazard alerts.
+* **Logic & Backend:** **Python** for detection processing and V2X trigger orchestration.
+* **Frontend & Simulation:** **JavaScript** and **HTML** for the interactive environment and real-time monitoring dashboard.
+* **Deployment:** **Docker & Docker Compose** for microservices isolation and networking.
+
+### Demo
 Check out the simulation and the system in action:
 🎥 **[Watch the Simulation Video on YouTube](https://youtu.be/o6qV1tiywO0)**
 
-## System Architecture
-The repository is divided into two main components:
-* `app2/`: Contains the core application and detection logic (Python/JS and HTML interfaces).
-* `simulador/`: The simulation environment setup designed to recreate pedestrian crossing scenarios and test the detection algorithms safely.
-
-## Getting Started
-To get a local copy up and running, follow these simple steps.
-
-### Prerequisites
-Make sure you have Docker and Docker Compose installed on your system to run the containerized setup.
-* Docker
-* Docker Compose (v2 recommended)
-
-### Installation
-Clone the repository to your local machine:
-```bash
-git clone [https://github.com/Migueljfc/Pedestrian-Crossing-Detection.git](https://github.com/Migueljfc/Pedestrian-Crossing-Detection.git)
-cd Pedestrian-Crossing-Detection
-```
-
-### Usage
-The project includes a docker-compose.yml file to orchestrate the application and the simulator dependencies effortlessly.
-To start the system, run:
-```bash
-docker compose up -d
-```
-(Use docker-compose up -d if you are using older versions of Docker).
-This will spin up all the necessary services for the pedestrian detection and the simulator interface.
-(Note: Depending on how the frontend is exposed, you may access the dashboard via ``http://localhost:<PORT>`` — adjust the port according to your docker-compose config).
-
-To stop the system, run:
-```bash
-docker compose down
-```
